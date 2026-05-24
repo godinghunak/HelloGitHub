@@ -33,6 +33,10 @@ HEADERS = {
     "X-GitHub-Api-Version": "2022-11-28",
 }
 
+# Request timeout in seconds — increased from 10 to 15 to reduce timeout errors
+# on slow connections or when the API is under load
+REQUEST_TIMEOUT = 15
+
 
 def get_token() -> Optional[str]:
     """Retrieve GitHub personal access token from environment variables."""
@@ -69,7 +73,7 @@ def fetch_repo_info(owner: str, repo: str) -> Optional[dict]:
     headers = build_headers()
 
     try:
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
         response.raise_for_status()
     except requests.exceptions.HTTPError as exc:
         logger.error("HTTP error for %s/%s: %s", owner, repo, exc)
@@ -95,13 +99,3 @@ def fetch_repo_info(owner: str, repo: str) -> Optional[dict]:
         "pushed_at": data.get("pushed_at"),
         "created_at": data.get("created_at"),
         # Include subscriber (watch) count — useful for gauging community interest
-        "subscribers_count": data.get("subscribers_count", 0),
-    }
-
-
-def parse_repo_url(url: str) -> Optional[tuple]:
-    """
-    Parse a GitHub repository URL into (owner, repo) components.
-
-    Args:
-        url: Full GitHub repository URL, e.g. htt
