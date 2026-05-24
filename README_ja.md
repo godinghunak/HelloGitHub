@@ -19,6 +19,8 @@
 このプロジェクトを通じて、より多くの人々が **オープンソースコミュニティ** に参加し、コミュニティに貢献することを望んでいます。これらの興味深く価値のあるプロジェクトが、より多くの人々によって発見され、関心を持たれ、参加され、コントリビュートされるようにしましょう。これらのプロジェクトに参加する過程で、あなたはより多くのプログラミングの知識を学び📚、プログラミングのスキルを向上させ💻、プログラミングの楽しさを見つけるでしょう🎮。
 
 > 📝 **個人メモ**: 自分の学習記録として、各号で特に気に入ったプロジェクトに印をつけています。このフォークは主にPython関連プロジェクトの追跡と、日本語訳の改善を目的としています。
+>
+> 🐍 **Pythonプロジェクト一覧**: Python関連プロジェクトをまとめた個人メモは [PYTHON_PICKS.md](PYTHON_PICKS.md) に記録しています。
 
 ## コンテンツ
 
@@ -31,4 +33,4 @@
 | [第 115 号](/content/HelloGitHub115.md) | [第 114 号](/content/HelloGitHub114.md) | [第 113 号](/content/HelloGitHub113.md) | [第 112 号](/content/HelloGitHub112.md) | [第 111 号](/content/HelloGitHub111.md) |
 | [第 110 号](/content/HelloGitHub110.md) | [第 109 号](/content/HelloGitHub109.md) | [第 108 号](/content/HelloGitHub108.md) | [第 107 号](/content/HelloGitHub107.md) | [第 106 号](/content/HelloGitHub106.md) |
 | [第 105 号](/content/HelloGitHub105.md) | [第 104 号](/content/HelloGitHub104.md) | [第 103 号](/content/HelloGitHub103.md) | [第 102 号](/content/HelloGitHub102.md) | [第 101 号](/content/HelloGitHub101.md) |
-| [第 100 号](/content/HelloGitHub100.md) | [第 99 号](/content/H
+| [第 100 号](/con
