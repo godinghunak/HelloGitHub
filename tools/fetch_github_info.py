@@ -36,7 +36,8 @@ HEADERS = {
 
 def get_token() -> Optional[str]:
     """Retrieve GitHub personal access token from environment variables."""
-    token = os.environ.get("GITHUB_TOKEN")
+    # Also check GH_TOKEN as an alternative env var name (used by GitHub CLI)
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
     if not token:
         logger.warning(
             "GITHUB_TOKEN not set. API rate limits will be restricted to 60 req/hour."
@@ -93,6 +94,8 @@ def fetch_repo_info(owner: str, repo: str) -> Optional[dict]:
         "archived": data.get("archived", False),
         "pushed_at": data.get("pushed_at"),
         "created_at": data.get("created_at"),
+        # Include subscriber (watch) count — useful for gauging community interest
+        "subscribers_count": data.get("subscribers_count", 0),
     }
 
 
@@ -101,41 +104,4 @@ def parse_repo_url(url: str) -> Optional[tuple]:
     Parse a GitHub repository URL into (owner, repo) components.
 
     Args:
-        url: Full GitHub repository URL, e.g. https://github.com/owner/repo
-
-    Returns:
-        A tuple of (owner, repo) or None if the URL is invalid.
-    """
-    url = url.rstrip("/")
-    parts = url.split("/")
-    if len(parts) >= 2 and "github.com" in url:
-        return parts[-2], parts[-1]
-    return None
-
-
-def main():
-    """CLI entry point: accept a GitHub URL and print repo info as JSON."""
-    if len(sys.argv) < 2:
-        print(f"Usage: {sys.argv[0]} <github_repo_url>")
-        sys.exit(1)
-
-    repo_url = sys.argv[1]
-    parsed = parse_repo_url(repo_url)
-
-    if not parsed:
-        logger.error("Invalid GitHub repository URL: %s", repo_url)
-        sys.exit(1)
-
-    owner, repo = parsed
-    logger.info("Fetching info for %s/%s ...", owner, repo)
-
-    info = fetch_repo_info(owner, repo)
-    if info is None:
-        logger.error("Failed to fetch repository information.")
-        sys.exit(1)
-
-    print(json.dumps(info, indent=2, ensure_ascii=False))
-
-
-if __name__ == "__main__":
-    main()
+        url: Full GitHub repository URL, e.g. htt
